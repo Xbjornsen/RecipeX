@@ -58,7 +58,7 @@ export default function ProfileMenu() {
         <Alert
           severity="success"
           open={alertOpen}
-          color="info"
+          color="success"
           onClose={handleAlertClose}
           variant="filled"
           className={classes.alert}
