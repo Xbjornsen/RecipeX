@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   profileIcon: {},
   paper: {
-    position: "relative",
+    position: 'relative',
+    top: '40%',
+    left: '40%',
+
+  },
+  alert: {
     width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -53,9 +54,18 @@ export default function ProfileMenu() {
   const menuId = "menu-appbar";
 
   const logoutBody = (
-    <Alert severity="info" open={alertOpen} onClose={handleAlertClose}>
-      <AlertTitle>Sucessfully Logged out</AlertTitle>
-    </Alert>
+    <div className={classes.paper}>
+        <Alert
+          severity="success"
+          open={alertOpen}
+          color="success"
+          onClose={handleAlertClose}
+          variant="filled"
+          className={classes.alert}
+        >
+          <AlertTitle>Sucessfully Logged out</AlertTitle>
+        </Alert>
+    </div>
   );
 
   return (
@@ -89,7 +99,9 @@ export default function ProfileMenu() {
         </MenuItem>
         <MenuItem onClick={handleAlertOpen}>Logout</MenuItem>
       </Menu>
-      <Modal open={alertOpen} onClose={handleAlertClose}>{logoutBody}</Modal>
+      <Modal open={alertOpen} onClose={handleAlertClose}>
+        {logoutBody}
+      </Modal>
     </div>
   );
 }

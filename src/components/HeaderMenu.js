@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   title: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(4),
     flexGrow: 1,
+    color: theme.palette,
     textDecorationLine: 'none',
     "&$selected": {
       backgroundColor: 'black',
