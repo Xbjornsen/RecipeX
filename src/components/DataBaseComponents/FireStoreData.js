@@ -1,9 +1,10 @@
 import React from "react";
-import useGetData from "../../hooks/useGetData";
+import {useGetData} from "../../hooks/useGetData";
 import Update from "./Update";
+import Delete from "./Delete";
 
 
-export default function FireStoreData() {
+const FireStoreData = () => {
     const [documents] = useGetData();
     
     return(
@@ -12,11 +13,13 @@ export default function FireStoreData() {
             {documents.map((documents) => (
                 <div key={documents.id}>
                     <div>
-                        Document: {documents.id} Value: {documents.value}
+                        Document: {documents.id} Value: {documents.value.value}
                     </div>
+                    <Delete doc={documents.id} />
                     <Update doc={documents.id} />
                 </div>
             ))}
         </div>    
     );
 };
+export default FireStoreData;

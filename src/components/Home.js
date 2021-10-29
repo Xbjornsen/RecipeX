@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import Add from "./DataBaseComponents/Add";
+import FireStoreData from "./DataBaseComponents/FireStoreData";
 
 
 
@@ -28,7 +29,8 @@ function Home() {
             <Typography variant='h4'>Home</Typography>
             
         </Container>
-        < Add /> 
+        < Add />
+        <FireStoreData /> 
     </div>
   );
 }

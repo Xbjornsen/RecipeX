@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase";
 
-export default function useGetData() {
+export const useGetData = () => {
 
     const [documents, setDocuments ] = useState([]);
     const db = firebase.firestore();

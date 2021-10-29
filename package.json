@@ -1,5 +1,5 @@
 {
-  "name": "recipex",
+  "name": "RecipeX",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -45,5 +45,6 @@
   },
   "main": "index.js",
   "repository": "https://github.com/Xbjornsen/RecipeX.git",
-  "license": "MIT"
+  "license": "MIT",
+  "author": "Xbjornsen"
 }

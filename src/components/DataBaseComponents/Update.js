@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase";
 
-export default function Update( {doc}) {
+const Update = ({doc}) => {
     const [value, setValue] = useState("");
     const db = firebase.firestore();
 
@@ -26,8 +26,10 @@ export default function Update( {doc}) {
 
     return (
         <div>
-            <input onClick={getValue} type='text' />
+            <input onBlur={getValue} type='text' />
             <button onClick={updateValue}>Update</button>
         </div>
     );
 };
+
+export default Update; 
