@@ -6,7 +6,6 @@ import LoginForm from "./components/LoginForm";
 import About from "./components/About";
 import { CssBaseline } from "@material-ui/core";
 import theme from "./styles/theme";
-//import firebase from './firebase'
 import React from "react";
 import HeaderMenu from "./components/HeaderMenu";
 import Footer from "./components/Footer";

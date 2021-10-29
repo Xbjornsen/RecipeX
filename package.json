@@ -10,7 +10,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "caniuse-lite": "^1.0.30001233",
-    "firebase": "^8.2.3",
+    "firebase": "^8.10.0",
     "next": "^10.2.4-canary.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Xbjornsen/RecipeX.git",
+  "license": "MIT"
 }

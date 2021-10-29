@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
+import Add from "./DataBaseComponents/Add";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,9 +26,12 @@ function Home() {
     <div className={classes.root}>
         <Container className={classes.container}>
             <Typography variant='h4'>Home</Typography>
+            
         </Container>
+        < Add /> 
     </div>
   );
 }
 
 export default Home;
+
