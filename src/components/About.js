@@ -6,7 +6,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import author from '../static/images/author.jpg';
+import author from "../static/images/author.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +24,7 @@ export default function About() {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={author}
-          title="Author"
-        />
+        <CardMedia className={classes.media} image={author} title="Author" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             Xavier Thorbjornsen

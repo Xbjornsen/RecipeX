@@ -15,7 +15,7 @@ var firebaseApp = firebase.initializeApp({
   });
 
  var dataBase = firebaseApp.firestore();
- 
+
 export { dataBase }
 
-  export default firebase
+export default firebase

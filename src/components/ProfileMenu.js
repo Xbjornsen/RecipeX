@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/MenuItem";
 import { NavLink } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Modal } from "@material-ui/core";
+import Login from "./Login";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -74,7 +75,7 @@ export default function ProfileMenu() {
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
-        onClick={handleProfileMenuOpen}
+        onClick={Login}
         color="inherit"
       >
         <AccountCircle className={classes.profileIcon} />
