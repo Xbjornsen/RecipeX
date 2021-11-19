@@ -3,7 +3,8 @@ import firebase from "firebase";
 
 
 
-const Add = () => {
+const Add = ({data}) => {
+    console.log(data)
     const [value, setValue ] = useState("");
     const db = firebase.firestore();
 
@@ -29,8 +30,6 @@ const Add = () => {
 
     return ( 
         <div >
-            <input onBlur={getValue} type='text' />
-            <button type='button' onClick={addValue}>Add</button>
 
         </div>
     )
