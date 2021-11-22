@@ -27,7 +27,11 @@ export default function NewRecipe() {
     const classes = useStyles();
     const { register, handleSubmit, formState: { errors } } = useForm();
     //const onSubmit = data => console.log(data);
-    const onSubmit = data => () => <Add data={data}/>;
+    const onSubmit = (data) => {
+        console.log(data)
+        Add(data)
+    }
+
 
     // const Item = styled(Paper)(({ theme }) => ({
     //     padding: theme.spacing(1),
@@ -81,7 +85,6 @@ export default function NewRecipe() {
                         type="submit"
                         className={classes.button}
                         startIcon={<SaveIcon />}
-                        onClick={onSubmit}
                     >
                         Save
                     </Button>

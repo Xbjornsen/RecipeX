@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import firebase from "firebase";
 
 
-
-const Add = ({data}) => {
-    console.log(data)
-    const [value, setValue ] = useState("");
-    const db = firebase.firestore();
-
-    const getValue = (event) => {
-        setValue(event.target.value); 
-    };
-    
-    const addValue = () => {
-        db.collection("values")
-        .doc(value)
+const db = firebase.firestore();
+const Add = (data) => {
+    db.collection("values")
+        .doc(data)
         .set({
-            value: value,
+            value: data,
         })
         .then(function () {
             console.log("Value successfully written!");
@@ -24,15 +15,6 @@ const Add = ({data}) => {
         .catch(function (error) {
             console.log("Error writing Value: ", error);
         });
-    };
+};
 
-
-
-    return ( 
-        <div >
-
-        </div>
-    )
-}
-
-export default Add; 
+export default Add;
