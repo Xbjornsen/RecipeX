@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-  auth,
-  signInWithEmailAndPassword,
-  signInWithGoogle,
-} from "./Authentication/Authentication";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Button, makeStyles } from "@material-ui/core";
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {

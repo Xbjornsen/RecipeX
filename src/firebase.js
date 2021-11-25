@@ -1,21 +1,84 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firebase from "firebase/app";
 
 
- // initializse firebase
-var firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyA94Jk8fbit5X4DWDfr3gxPvChZaB7aEWI",
-    authDomain: "recipex-40b63.firebaseapp.com",
-    databaseURL: "https://recipex-40b63-default-rtdb.firebaseio.com",
-    projectId: "recipex-40b63",
-    storageBucket: "recipex-40b63.appspot.com",
-    messagingSenderId: "1047081265154",
-    appId: "1:1047081265154:web:5cfc80984ac9514f70df1b",
-    measurementId: "G-YFMRHES7NN"
-  });
 
- var dataBase = firebaseApp.firestore();
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  databaseURL: process.env.REACT_APP_databaseURL,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
+};
 
-export { dataBase }
+const app = firebase.initializeApp(firebaseConfig);
+const auth = app.auth();
+const db = app.firestore();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export default firebase
+const signInWithGoogle = async () => {
+  try {
+    const res = await auth.signInWithPopup(googleProvider);
+    const user = res.user;
+    const query = await db
+      .collection("users")
+      .where("uid", "==", user.uid)
+      .get();
+    if (query.docs.length === 0) {
+      await db.collection("users").add({
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await auth.createUserWithEmailAndPassword(email, password);
+    const user = res.user;
+    await db.collection("users").add({
+      uid: user.uid,
+      name,
+      authProvider: "local",
+      email,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+const sendPasswordResetEmail = async (email) => {
+  try {
+    await auth.sendPasswordResetEmail(email);
+    alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+const logout = () => {
+  auth.signOut();
+};
+export {
+  auth,
+  db,
+  signInWithGoogle,
+  signInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordResetEmail,
+  logout,
+};
