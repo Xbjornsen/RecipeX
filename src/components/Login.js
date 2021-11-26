@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Button, makeStyles } from "@material-ui/core";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,16 +27,7 @@ function Login() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading ] = useAuthState(auth);
   const history = useHistory();
-
-  useEffect(() => {
-    if (loading) {
-      // loading spinner
-      return;
-    }
-    if (user) history.replace("/dashboard");
-  }, [user, loading, history]);
 
   return (
     <div className={classes.login}>
@@ -57,12 +46,11 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password">
         </input>
-        <Button className={classes.loginButton}
-        onClick={() => signInWithEmailAndPassword(email, password)}> 
+        <Button className={classes.loginButton}>
             Login
         </Button>
         <Button 
-        className={classes.loginGoogle} onClick={signInWithGoogle}>
+        className={classes.loginGoogle} >
             Login with Google
         </Button>
         <div>

@@ -2,8 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
-import Add from "./DataBaseComponents/Add";
-import FireStoreData from "./DataBaseComponents/FireStoreData";
+
 
 
 
@@ -26,11 +25,8 @@ function Home() {
   return (
     <div className={classes.root}>
         <Container className={classes.container}>
-            <Typography variant='h4'>Home</Typography>
-            
+            <Typography variant='h4'>Home</Typography>            
         </Container>
-        < Add />
-        <FireStoreData /> 
     </div>
   );
 }
