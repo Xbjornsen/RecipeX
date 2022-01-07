@@ -30,6 +30,7 @@ export const App = () => {
             <Route path="/Favourites" component={Favourites} />
             <Route path="/NewRecipe" component={NewRecipe} />
             <Route path="/Recents" component={Recents} />
+            <Route path="/LoginForm" component={LoginForm} /> 
         </Switch>
         <Footer />
       </ThemeProvider>

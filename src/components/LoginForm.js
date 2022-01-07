@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { useForm } from "react-hook-form";
 import Paper from "@material-ui/core/Paper";
 import Container from '@material-ui/core/Container';
+import fire from '../firebase'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      display: 'flex',
-      flexgrow: 1,
+    display: 'flex',
+    flexgrow: 1,
   },
   container: {
     display: "flex",
@@ -17,26 +18,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
+const LoginPage = (props) => {
+
+  const { email, setEmail, password, setPassword, handleLogin, handleSignup, hasAccount, setHasAccount, emailError, passwordError } = props; 
+
   const classes = useStyles();
-  const {register, handleSubmit} = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log('here');
+
 
   return (
     <div className={classes.root}>
       <Container>
-      <Paper elevation={3} >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Paper elevation={3} >
+          {/* <form onSubmit={handleSubmit(onSubmit)}>
           <input {...register("email")}></input>
           <inut {...register("password")}></inut>
           <input type="submit"></input>
-        </form>
-        <div>Login Page</div>
-      </Paper>
+        </form> */}
+          <div>Login Page</div>
+        </Paper>
 
       </Container>
 
     </div>
   );
 }
+
+export default LoginPage;

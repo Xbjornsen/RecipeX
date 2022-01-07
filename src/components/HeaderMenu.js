@@ -4,13 +4,15 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
-import { fade, Toolbar } from "@material-ui/core";
+import { alpha, Toolbar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import AppBar from "@material-ui/core/AppBar";
-import ProfileMenu from "./ProfileMenu";
 import { Menu } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { Modal } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,15 +29,15 @@ const useStyles = makeStyles((theme) => ({
     "&$selected": {
       backgroundColor: 'black',
     }
-    
+
   },
   search: {
     alignItems: "right",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
     width: "100%",
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
       width: "auto",
     },
   },
+
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: "100%",
@@ -74,14 +77,21 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
     paddingLeft: theme.spacing(4),
   },
+  alert: {
+    width: 400,
+  },
 }));
 
 function HeaderMenu() {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [profileEvent, setProfileEvent] = useState(null)
+
 
   const isMenuOpen = Boolean(anchorEl);
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     console.log("set to null");
@@ -90,7 +100,41 @@ function HeaderMenu() {
     setAnchorEl(event.currentTarget);
   };
 
+
   const menuId = "app-bar";
+  const profileMenu = "profile-bar";
+
+  const handleProfileMenuClose = () => {
+    setProfileEvent(null);
+    console.log("set to null");
+  }
+  const handleProfileMenu = (event) => {
+    setProfileEvent(event.currentTarget);
+  }
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+  const handleAlertOpen = () => {
+    //  setAuth(false);
+    setAlertOpen(true);
+    setProfileEvent(null);
+  };
+
+  const logoutBody = (
+    <div className={classes.paper}>
+      <Alert
+        severity="success"
+        open={alertOpen}
+        color="success"
+        onClose={handleAlertClose}
+        variant="filled"
+        className={classes.alert}
+      >
+        <AlertTitle>Sucessfully Logged out</AlertTitle>
+      </Alert>
+    </div>
+  )
+
 
   return (
     <AppBar position="static">
@@ -103,12 +147,12 @@ function HeaderMenu() {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "left",
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "left",
           }}
           open={isMenuOpen}
           onClose={handleMenuClose}
@@ -122,15 +166,15 @@ function HeaderMenu() {
           <MenuItem onClick={handleMenuClose} component={NavLink} to="/Recents">
             Recents
           </MenuItem>
-          <MenuItem
-            onClick={handleMenuClose}
-            component={NavLink}
-            to="/Favourites"
+          <MenuItem onClick={handleMenuClose} component={NavLink} to="/Favourites"
           >
             Favourites
           </MenuItem>
+          <MenuItem onClick={handleMenuClose} component={NavLink} to="/LoginForm">
+              Login
+            </MenuItem> 
         </Menu>
-          <Typography component={NavLink} to="/" className={classes.title} variant="h4" color="inherit">Recipe Archive</Typography>
+        <Typography component={NavLink} to="/" className={classes.title} variant="h4" color="inherit">Recipe Archive</Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -144,12 +188,28 @@ function HeaderMenu() {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <div classsName={classes.userIcon}>
-          <ProfileMenu />
-        </div>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleProfileMenu}
+            color="inherit"
+          >
+            <AccountCircle className={classes.profileIcon} />
+          </IconButton>
+          <Modal open={alertOpen} onClose={handleAlertClose}>
+            {logoutBody}
+          </Modal>
       </Toolbar>
     </AppBar>
   );
 }
 
 export default HeaderMenu;
+
+
+ {/* <MenuItem onClick={handleAlertOpen}>Logout</MenuItem> */}
+
+            {/* <MenuItem onClick={handleProfileMenuClose} component={NavLink} to="/Account">
+               My Account
+             </MenuItem> */}
