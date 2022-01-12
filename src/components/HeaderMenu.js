@@ -10,29 +10,26 @@ import InputBase from "@material-ui/core/InputBase";
 import AppBar from "@material-ui/core/AppBar";
 import { Menu } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import { Modal } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  toolbar: {
+    padding: theme.spacing(0,2,0,2),
+  },
   menuButton: {
     margin: theme.spacing(2),
   },
   title: {
-    marginLeft: theme.spacing(4),
-    flexGrow: 1,
-    color: theme.palette,
+    marginLeft: theme.spacing(2),
     textDecorationLine: 'none',
-    "&$selected": {
-      backgroundColor: 'black',
-    }
-
+    flexGrow: 1,
   },
   search: {
-    alignItems: "right",
+    paddingLeft: 22,
+    justify: "right",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -82,13 +79,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HeaderMenu() {
+const HeaderMenu = () => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [profileEvent, setProfileEvent] = useState(null)
-
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -100,45 +94,11 @@ function HeaderMenu() {
     setAnchorEl(event.currentTarget);
   };
 
-
   const menuId = "app-bar";
-  const profileMenu = "profile-bar";
-
-  const handleProfileMenuClose = () => {
-    setProfileEvent(null);
-    console.log("set to null");
-  }
-  const handleProfileMenu = (event) => {
-    setProfileEvent(event.currentTarget);
-  }
-  const handleAlertClose = () => {
-    setAlertOpen(false);
-  };
-  const handleAlertOpen = () => {
-    //  setAuth(false);
-    setAlertOpen(true);
-    setProfileEvent(null);
-  };
-
-  const logoutBody = (
-    <div className={classes.paper}>
-      <Alert
-        severity="success"
-        open={alertOpen}
-        color="success"
-        onClose={handleAlertClose}
-        variant="filled"
-        className={classes.alert}
-      >
-        <AlertTitle>Sucessfully Logged out</AlertTitle>
-      </Alert>
-    </div>
-  )
-
 
   return (
     <AppBar position="static">
-      <Toolbar color="primary">
+      <Toolbar >
         <IconButton edge="start" aria-label="menu" onClick={handleMenuOpen}>
           <MenuIcon className={classes.menuButton} />
         </IconButton>
@@ -170,11 +130,11 @@ function HeaderMenu() {
           >
             Favourites
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} component={NavLink} to="/LoginForm">
-              Login
-            </MenuItem> 
+          <MenuItem onClick={handleMenuClose} component={NavLink} to="/Authentication">
+            Login
+          </MenuItem>
         </Menu>
-        <Typography component={NavLink} to="/" className={classes.title} variant="h4" color="inherit">Recipe Archive</Typography>
+        <Typography component={NavLink} to="/" className={classes.title} variant="h5" noWrap color="inherit">Recipe Archive</Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -188,28 +148,9 @@ function HeaderMenu() {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleProfileMenu}
-            color="inherit"
-          >
-            <AccountCircle className={classes.profileIcon} />
-          </IconButton>
-          <Modal open={alertOpen} onClose={handleAlertClose}>
-            {logoutBody}
-          </Modal>
       </Toolbar>
     </AppBar>
   );
 }
 
 export default HeaderMenu;
-
-
- {/* <MenuItem onClick={handleAlertOpen}>Logout</MenuItem> */}
-
-            {/* <MenuItem onClick={handleProfileMenuClose} component={NavLink} to="/Account">
-               My Account
-             </MenuItem> */}

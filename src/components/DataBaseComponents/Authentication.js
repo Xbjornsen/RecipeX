@@ -1,7 +1,8 @@
+import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import fire from '../firebase'
-import LoginPage from "../LoginForm";
+import fire from '../../firebase'
+import LogingForm from "../LoginForm";
+
 
 
 const LoginAuth = () => {
@@ -71,29 +72,29 @@ const LoginAuth = () => {
       }    
     });
   };
-
+  
   useEffect(() => {
     authListener();
   }, [])
-  const classes = useStyles();
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log('here');
 
   return ( 
       <div>
-          <LoginPage
-          email={email}
-          setEmail={setEmail}
-          password={setPassword}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-          handleSignup={handleSignup}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailError={emailError}
-          passwordError={passwordError}
-          ></LoginPage>
+          { user ? (
+            <><Button onClick={(handleLogout)}>Logout</Button></>
+          ) : (
+            <LogingForm
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+            handleSignup={handleSignup}
+            hasAccount={hasAccount}
+            setHasAccount={setHasAccount}
+            emailError={emailError}
+            passwordError={passwordError}
+            ></LogingForm>
+          )}
       </div>
   );
 }

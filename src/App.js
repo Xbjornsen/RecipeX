@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Home from "./components/Home";
-import LoginForm from "./components/LoginForm";
+import Authentication from "./components/DataBaseComponents/Authentication";
 import About from "./components/About";
 import { CssBaseline } from "@material-ui/core";
 import theme from "./styles/theme";
@@ -24,13 +24,12 @@ export const App = () => {
         <HeaderMenu />
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={LoginForm} />
             <Route path="/about" component={About} />
             <Route path="/Account" component={Account} />
             <Route path="/Favourites" component={Favourites} />
             <Route path="/NewRecipe" component={NewRecipe} />
             <Route path="/Recents" component={Recents} />
-            <Route path="/LoginForm" component={LoginForm} /> 
+            <Route path="/Authentication" component={Authentication} /> 
         </Switch>
         <Footer />
       </ThemeProvider>
