@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, makeStyles, TextField, Box, Paper, Typography} from "@material-ui/core";
+import { Button, makeStyles, TextField, Paper, Typography} from "@material-ui/core";
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,7 @@ const LogingForm = (props) => {
     <div className={classes.root}>
       <Container className={classes.container} maxWidth="sm">
         <Paper elevation={3} className={classes.paper} >
+          <Typography variant="h4" align="center" >Sign in</Typography> 
           <div className={classes.login} >
             <TextField 
             id="standard-basic" 

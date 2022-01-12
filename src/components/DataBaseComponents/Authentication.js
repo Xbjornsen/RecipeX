@@ -1,7 +1,8 @@
-import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import fire from '../../firebase'
 import LogingForm from "../LoginForm";
+import HeaderMenu from "../HeaderMenu";
+import { CircularProgress } from "@material-ui/core";
 
 
 
@@ -12,6 +13,7 @@ const LoginAuth = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const [loading, isLoading] = useState(false);
 
   const clearInputs = () => {
     setEmail("");
@@ -65,13 +67,14 @@ const LoginAuth = () => {
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if(user) {
-        clearInputs(); 
+        clearInputs();
         setUser(user);   
       }else{
         setUser("");
       }    
     });
   };
+
   
   useEffect(() => {
     authListener();
@@ -80,7 +83,7 @@ const LoginAuth = () => {
   return ( 
       <div>
           { user ? (
-            <><Button onClick={(handleLogout)}>Logout</Button></>
+            <><HeaderMenu handleLogout={handleLogout}></HeaderMenu></>
           ) : (
             <LogingForm
             email={email}

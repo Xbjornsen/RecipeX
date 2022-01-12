@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
-import { alpha, Toolbar } from "@material-ui/core";
+import { alpha, Button, Toolbar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import AppBar from "@material-ui/core/AppBar";
@@ -70,16 +70,16 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  userIcon: {
+  logoutIcon: {
     color: "inherit",
-    paddingLeft: theme.spacing(4),
+    marginLeft: theme.spacing(4),
   },
   alert: {
     width: 400,
   },
 }));
 
-const HeaderMenu = () => {
+const HeaderMenu = ({handleLogout}) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -120,9 +120,6 @@ const HeaderMenu = () => {
           <MenuItem onClick={handleMenuClose} component={NavLink} to="/">
             Home
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} component={NavLink} to="/about">
-            About
-          </MenuItem>
           <MenuItem onClick={handleMenuClose} component={NavLink} to="/Recents">
             Recents
           </MenuItem>
@@ -130,8 +127,8 @@ const HeaderMenu = () => {
           >
             Favourites
           </MenuItem>
-          <MenuItem onClick={handleMenuClose} component={NavLink} to="/Authentication">
-            Login
+          <MenuItem onClick={handleMenuClose} component={NavLink} to="/About">
+            About
           </MenuItem>
         </Menu>
         <Typography component={NavLink} to="/" className={classes.title} variant="h5" noWrap color="inherit">Recipe Archive</Typography>
@@ -148,6 +145,7 @@ const HeaderMenu = () => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
+        <Button className={classes.logoutIcon} onClick={handleLogout} variant="outlined">Logout</Button>
       </Toolbar>
     </AppBar>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 
@@ -27,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home() {
+const Home = () => {
   const classes = useStyles();
+  console.log("here");
 
 
   return (
     <div className={classes.root}>
-        <Container className={classes.container}>
-            <Typography variant='h4'>Home</Typography>            
+        <Container className={classes.container} >
+            <Typography variant='h4' color="primary">Home</Typography>            
         </Container>
     </div>
   );
