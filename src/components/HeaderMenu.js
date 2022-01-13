@@ -117,7 +117,7 @@ const HeaderMenu = ({handleLogout}) => {
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose} component={NavLink} to="/">
+          <MenuItem onClick={handleMenuClose} component={NavLink} to="/Home">
             Home
           </MenuItem>
           <MenuItem onClick={handleMenuClose} component={NavLink} to="/Recents">
@@ -131,7 +131,7 @@ const HeaderMenu = ({handleLogout}) => {
             About
           </MenuItem>
         </Menu>
-        <Typography component={NavLink} to="/" className={classes.title} variant="h5" noWrap color="inherit">Recipe Archive</Typography>
+        <Typography component={NavLink} to="/Home" className={classes.title} variant="h5" noWrap color="inherit">Recipe Archive</Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />

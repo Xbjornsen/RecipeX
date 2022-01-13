@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import fire from '../../firebase'
 import LogingForm from "../LoginForm";
-import HeaderMenu from "../HeaderMenu";
+import Home from "../Home";
 import { CircularProgress } from "@material-ui/core";
 
 
@@ -83,7 +83,7 @@ const LoginAuth = () => {
   return ( 
       <div>
           { user ? (
-            <><HeaderMenu handleLogout={handleLogout}></HeaderMenu></>
+            <><Home handleLogout={handleLogout}></Home></>
           ) : (
             <LogingForm
             email={email}

@@ -2,13 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
+import HeaderMenu from "./HeaderMenu";
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexGrow: 1,
-    margin: 10,
   },
   container: {
     display: "flex",
@@ -27,13 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Home = ({handleLogout}) => {
   const classes = useStyles();
   console.log("here");
 
 
+
   return (
+
     <div className={classes.root}>
+      <HeaderMenu handleLogout={handleLogout}></HeaderMenu>
         <Container className={classes.container} >
             <Typography variant='h4' color="primary">Home</Typography>            
         </Container>

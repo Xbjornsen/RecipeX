@@ -22,7 +22,6 @@ export const App = () => {
         <CssBaseline />
         <Authentication />
         <Switch>
-            <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Account" component={Account} />
             <Route path="/Favourites" component={Favourites} />
