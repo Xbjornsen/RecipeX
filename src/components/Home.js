@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = ({handleLogout}) => {
+const Home = () => {
   const classes = useStyles();
   console.log("here");
 
@@ -34,7 +34,6 @@ const Home = ({handleLogout}) => {
   return (
 
     <div className={classes.root}>
-      <HeaderMenu handleLogout={handleLogout}></HeaderMenu>
         <Container className={classes.container} >
             <Typography variant='h4' color="primary">Home</Typography>            
         </Container>

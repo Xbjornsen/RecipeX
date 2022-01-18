@@ -10,8 +10,8 @@ import Favourites from "./components/Favourites";
 import NewRecipe from "./components/NewRecipe";
 import Recents from "./components/Recents";
 import Home from "./components/Home";
-import Authentication from "./components/DataBaseComponents/Authentication";
 import About from "./components/About";
+import HeaderMenu from "./components/HeaderMenu";
 
 export const App = () => {
   // const classes = useStyles();
@@ -20,8 +20,9 @@ export const App = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Authentication />
+        <HeaderMenu/> 
         <Switch>
+          <Route Exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Account" component={Account} />
             <Route path="/Favourites" component={Favourites} />
