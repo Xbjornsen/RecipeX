@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, useEffect } from "react";
 import { Button, makeStyles, TextField, Paper, Typography} from "@material-ui/core";
+import fire from "../firebase";
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,14 +39,95 @@ const useStyles = makeStyles((theme) => ({
 
 const LogingForm = (props) => {
 
-  const { email, setEmail, password, setPassword, handleLogin, handleSignup, hasAccount, setHasAccount, emailError, passwordError } = props;
+  
+    const [email, setEmail] = useState("");
+    const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [hasAccount, setHasAccount] = useState(false);
+  
+  
+    const clearInputs = () => {
+      setEmail("");
+      setPassword("");
+    };
+  
+    const clearErrors = () => {
+      setEmailError("");
+      setPasswordError("");
+    };
+    const handleLogin = () => {
+      clearErrors();
+      fire
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .catch((err) => {
+          switch (err.code) {
+            case "auth/invalid-email":
+            case "auth/user-disabled":
+            case "auth/user-not-found":
+              setEmailError(err.message);
+              break;
+            case "auth/wrong-password":
+              setPasswordError(err.message);
+              break;
+            default:
+              break;
+          }
+        });
+    };
+    const handleSignup = () => {
+      clearErrors();
+      fire
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .catch((err) => {
+          switch (err.code) {
+            case "auth/email-already-in-use":
+            case "auth/invalid-email":
+              setEmailError(err.message);
+              break;
+            case "auth/weak-password":
+              setPasswordError(err.message);
+              break;
+            default:
+              break;
+          }
+        });
+    };
+    
+    const handleLogout = () => {
+      console.log("signout called");
+      fire.auth().signOut();
+    };
+
+      
+   const authListener = () => {
+      fire.auth().onAuthStateChanged((user) => {
+        if (user) {
+          clearInputs();
+          setUser(user);;
+        } else {
+          setUser("");
+        }
+      });
+    };
+  
+    useEffect(() => {
+      authListener();
+    },[]);
+
+
 
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      
       <Container className={classes.container} maxWidth="sm">
         <Paper elevation={3} className={classes.paper} >
+        {user ? (<><Button onClick={handleLogout}>Logout</Button></>) : (<>
           <Typography variant="h4" align="center" >Sign in</Typography> 
           <div className={classes.login} >
             <TextField 
@@ -90,10 +172,12 @@ const LogingForm = (props) => {
                 </>
               )}
             </div>
+            </>
+            )}
         </Paper>
 
       </Container>
-
+        
     </div>
   );
 }

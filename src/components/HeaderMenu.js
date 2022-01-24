@@ -4,12 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
-import { alpha, Button, Toolbar } from "@material-ui/core";
+import { alpha, Toolbar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import AppBar from "@material-ui/core/AppBar";
 import { Menu } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
+import ProfileMenu from "./ProfileMenu";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +89,6 @@ const HeaderMenu = ({handleLogout}) => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    console.log("set to null");
   };
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -145,7 +145,8 @@ const HeaderMenu = ({handleLogout}) => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <Button className={classes.logoutIcon} onClick={handleLogout} variant="outlined">Logout</Button>
+        
+        <ProfileMenu /> 
       </Toolbar>
     </AppBar>
   );

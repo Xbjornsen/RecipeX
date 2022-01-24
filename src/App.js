@@ -12,9 +12,9 @@ import Recents from "./components/Recents";
 import Home from "./components/Home";
 import About from "./components/About";
 import HeaderMenu from "./components/HeaderMenu";
+import LoginForm from "./components/LoginForm";
 
 export const App = () => {
-  // const classes = useStyles();
 
   return (
     <Router>
@@ -22,12 +22,13 @@ export const App = () => {
         <CssBaseline />
         <HeaderMenu/> 
         <Switch>
-          <Route Exact path="/" component={Home} />
+          <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Account" component={Account} />
             <Route path="/Favourites" component={Favourites} />
             <Route path="/NewRecipe" component={NewRecipe} />
             <Route path="/Recents" component={Recents} />
+            <Route path="/LoginForm" component={LoginForm} /> 
         </Switch>
         <Footer />
       </ThemeProvider>
