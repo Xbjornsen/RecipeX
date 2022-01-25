@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import HeaderMenu from "./components/HeaderMenu";
 
+
 export const App = () => {
   // const classes = useStyles();
 
@@ -20,9 +21,9 @@ export const App = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <HeaderMenu/> 
+        <HeaderMenu/>
         <Switch>
-          <Route Exact path="/" component={Home} />
+          <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Account" component={Account} />
             <Route path="/Favourites" component={Favourites} />
