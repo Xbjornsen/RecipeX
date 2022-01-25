@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   search: {
-    paddingLeft: 22,
+    marginRight: 30,
     justify: "right",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderMenu = ({handleLogout}) => {
+const HeaderMenu = () => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);

@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
 
-    <div className={classes.root}>
+    <div >
         <Container className={classes.container} >
             <Typography variant='h4' color="primary">Home</Typography>            
         </Container>

@@ -1,22 +1,22 @@
-import { Container, makeStyles } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import fire from "../firebase";
+import LoginForm from './LoginForm';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
+const Account = (user) => {
 
-    },
-
-}))
-
-export default function Account() {
-    const classes = useStyles();
+    const handleLogout = () => {
+        console.log("signout called");
+        fire.auth().signOut();
+      };
 
     return (
-        <div className={classes.root}>
-            <Container>
-                Account Details 
-
-            </Container>
+        <div>
+            {user ?  (<><Button onClick={handleLogout}>Signout</Button></>) : (<><NavLink  to="/LoginForm" /></>)}
+            
         </div>
     )
 }
+
+export default Account;

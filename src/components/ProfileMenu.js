@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import { NavLink } from "react-router-dom";
-import { makeStyles, Menu } from "@material-ui/core";
-import { MenuItem, IconButton } from "@material-ui/core";
+import { NavLink } from 'react-router-dom';
+import { makeStyles, Menu, IconButton, Button, MenuItem } from "@material-ui/core";
 import { AccountBox } from "@material-ui/icons";
+import fire from "../firebase";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +15,28 @@ const useStyles = makeStyles((theme) => ({
   }, 
 }));
 
+
 const Profile = () => {
+  
+  const[user, setUser] = useState("");
+
+  const firebaseCheckAuth = () => {
+      fire
+      .auth().onAuthStateChanged((user) => {
+          if(user) {
+              setUser(user)
+          }else {
+              setUser("")
+          }
+
+      })
+  }
+  const handleLogout = () => {
+    console.log("signout called");
+    fire.auth().signOut();
+    setUser("");
+  };
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -23,6 +45,7 @@ const Profile = () => {
     setAnchorEl(null);
   };
   const handleMenuOpen = (event) => {
+    firebaseCheckAuth();
     setAnchorEl(event.currentTarget);
   };
 
@@ -48,9 +71,9 @@ const Profile = () => {
         }}
         open={isMenuOpen}
         onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose} component={NavLink} to="/LoginForm">Signin</MenuItem>
-        <MenuItem onClick={handleMenuClose } component={NavLink} to="/LoginForm">Signout</MenuItem>
+      ><MenuItem onClick={handleMenuClose}>{user ?  (<><Button onClick={handleLogout}>Signout</Button></>) : (<><Button component={NavLink} to="/LoginForm">Signin</Button ></>)}</MenuItem>
+         
+            
       </Menu>
     </div>
   );

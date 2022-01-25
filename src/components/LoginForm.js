@@ -2,6 +2,8 @@ import React, {useState, useEffect } from "react";
 import { Button, makeStyles, TextField, Paper, Typography} from "@material-ui/core";
 import fire from "../firebase";
 import Container from '@material-ui/core/Container';
+import { NavLink } from "react-router-dom";
+import Home from './Home';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LogingForm = (props) => {
+const LogingForm = () => {
 
   
     const [email, setEmail] = useState("");
@@ -96,18 +98,12 @@ const LogingForm = (props) => {
           }
         });
     };
-    
-    const handleLogout = () => {
-      console.log("signout called");
-      fire.auth().signOut();
-    };
-
       
    const authListener = () => {
       fire.auth().onAuthStateChanged((user) => {
         if (user) {
           clearInputs();
-          setUser(user);;
+          setUser(user);
         } else {
           setUser("");
         }
@@ -126,8 +122,9 @@ const LogingForm = (props) => {
     <div className={classes.root}>
       
       <Container className={classes.container} maxWidth="sm">
-        <Paper elevation={3} className={classes.paper} >
-        {user ? (<><Button onClick={handleLogout}>Logout</Button></>) : (<>
+        
+        {user ? (<><Home /></>) : (<>
+          <Paper elevation={3} className={classes.paper} >
           <Typography variant="h4" align="center" >Sign in</Typography> 
           <div className={classes.login} >
             <TextField 
@@ -172,10 +169,9 @@ const LogingForm = (props) => {
                 </>
               )}
             </div>
+            </Paper>
             </>
             )}
-        </Paper>
-
       </Container>
         
     </div>
