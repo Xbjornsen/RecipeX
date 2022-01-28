@@ -71,7 +71,9 @@ const Profile = () => {
         }}
         open={isMenuOpen}
         onClose={handleMenuClose}
-      ><MenuItem onClick={handleMenuClose}>{user ?  (<><Button onClick={handleLogout}>Signout</Button></>) : (<><Button component={NavLink} to="/LoginForm">Signin</Button ></>)}</MenuItem>
+      >
+        <MenuItem onClick={handleMenuClose}><Button component={NavLink} to="/Account">Account</Button></MenuItem> 
+        <MenuItem onClick={handleMenuClose}>{user ?  (<><Button onClick={handleLogout}>Signout</Button></>) : (<><Button component={NavLink} to="/LoginForm">Signin</Button ></>)}</MenuItem>
          
             
       </Menu>

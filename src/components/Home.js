@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Container } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
+import { Typography, Paper, Button } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root:{
+
   },
   container: {
     display: "flex",
@@ -24,19 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+export default function Home() {
   const classes = useStyles();
 
 
   return (
 
-    <div >
-        <Container className={classes.container} >
-            <Typography variant='h4' color="primary">Home</Typography>            
+    <div>
+        <Container >
+            <Typography >Home</Typography>       
         </Container>
     </div>
   );
-}
-
-export default Home;
+};
 

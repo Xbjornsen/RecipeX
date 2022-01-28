@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Recents() {
     const classes = useStyles();
     return (
-        <div className={classes.root}> 
+        <div> 
         <Container>
             <Typography>
                 Recents

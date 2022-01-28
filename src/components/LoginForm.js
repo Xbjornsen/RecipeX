@@ -2,8 +2,7 @@ import React, {useState, useEffect } from "react";
 import { Button, makeStyles, TextField, Paper, Typography} from "@material-ui/core";
 import fire from "../firebase";
 import Container from '@material-ui/core/Container';
-import { NavLink } from "react-router-dom";
-import Home from './Home';
+import Account from './Account';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +77,7 @@ const LogingForm = () => {
               break;
           }
         });
+        
     };
     const handleSignup = () => {
       clearErrors();
@@ -123,7 +123,7 @@ const LogingForm = () => {
       
       <Container className={classes.container} maxWidth="sm">
         
-        {user ? (<><Home /></>) : (<>
+        {user ? (<><Account /></>) : (<>
           <Paper elevation={3} className={classes.paper} >
           <Typography variant="h4" align="center" >Sign in</Typography> 
           <div className={classes.login} >
