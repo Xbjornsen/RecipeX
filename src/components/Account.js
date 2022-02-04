@@ -8,6 +8,7 @@ import {
   Typography,
   TextField,
 } from "@material-ui/core";
+import { SettingsEthernet } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import fire from "../firebase";
 
@@ -34,23 +35,29 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
   button: {
-      display: 'flex',
-      justifyContent: 'right',
-  }
+    display: "flex",
+    justifyContent: "right",
+  },
 }));
 
-const Account = () => {
+const Account = (user) => {
   const classes = useStyles();
-  const [user, setUser] = useState([]);
+  const [userAccount, setUserAccount] = useState([]);
   const [edit, setEdit] = useState(Boolean);
   const [newValue, setNewValue] = useState("");
+
+  useEffect(() => {
+    fetchData()
+  }, []);
 
   const updateDetails = () => {
     fire.auth().currentUser.updateProfile({
       displayName: newValue,
     });
-    fetchData();
-    setEdit(false);
+    fetchData(); 
+    setTimeout(() => {
+        setEdit(false);
+    }, 700);
   };
 
   const editDetails = () => {
@@ -58,15 +65,10 @@ const Account = () => {
   };
 
   const fetchData = async () => {
-      console.log("user data fetched");
-        const auth = fire.auth();
-        const user = auth.currentUser;
-        setUser(user);
+    const auth = fire.auth();
+    const currentUser = auth.currentUser;
+    setUserAccount(currentUser);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -102,28 +104,20 @@ const Account = () => {
                 <ListItem>
                   <ListItemText
                     primary="Display Name"
-                    secondary={user.displayName !== 'null' ? "null" : user.displayName}
+                    secondary={userAccount.displayName}
                   ></ListItemText>
+                  <Button variant="outlined" onClick={editDetails}>
+                    Edit Name
+                  </Button>
                 </ListItem>
 
                 <ListItem>
                   <ListItemText
                     primary="Email"
-                    secondary={user.email}
+                    secondary={userAccount.email}
                   ></ListItemText>
                 </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary="Email Verified"
-                    secondary={user.emailVerified ? "true" : "false"}
-                  />
-                </ListItem>
               </List>
-            </div>
-            <div className={classes.editButton}>
-              <Button variant="outlined" onClick={editDetails}>
-                Edit information
-              </Button>
             </div>
           </>
         )}

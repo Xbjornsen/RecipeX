@@ -123,7 +123,7 @@ const LogingForm = () => {
       
       <Container className={classes.container} maxWidth="sm">
         
-        {user ? (<><Account /></>) : (<>
+        {user ? (<><Account userAccount={user} /></>) : (<>
           <Paper elevation={3} className={classes.paper} >
           <Typography variant="h4" align="center" >Sign in</Typography> 
           <div className={classes.login} >

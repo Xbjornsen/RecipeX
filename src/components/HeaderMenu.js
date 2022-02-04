@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
-import { alpha, Toolbar } from "@material-ui/core";
+import { alpha, Toolbar, Container } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,10 +15,9 @@ import ProfileMenu from "./ProfileMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
     flexGrow: 1,
-  },
-  toolbar: {
-    padding: theme.spacing(0,2,0,2),
+    alignItems: 'stretch',
   },
   menuButton: {
     margin: theme.spacing(2),
@@ -97,7 +96,9 @@ const HeaderMenu = () => {
   const menuId = "app-bar";
 
   return (
-    <AppBar position="static">
+    
+    <AppBar position="static" >
+      <Container >
       <Toolbar >
         <IconButton edge="start" aria-label="menu" onClick={handleMenuOpen}>
           <MenuIcon className={classes.menuButton} />
@@ -148,7 +149,9 @@ const HeaderMenu = () => {
         
         <ProfileMenu /> 
       </Toolbar>
+      </Container>
     </AppBar>
+    
   );
 }
 
