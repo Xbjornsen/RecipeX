@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { Button, makeStyles, TextField, Paper, Typography} from "@material-ui/core";
+import { Button, makeStyles, TextField, Paper, Typography, CircularProgress} from "@material-ui/core";
 import fire from "../firebase";
 import Container from '@material-ui/core/Container';
 import Account from './Account';
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LogingForm = () => {
 
-  
+    const [loading, setLoading] = useState(Boolean); 
     const [email, setEmail] = useState("");
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
@@ -59,6 +59,7 @@ const LogingForm = () => {
       setPasswordError("");
     };
     const handleLogin = () => {
+      setLoading(true);
       clearErrors();
       fire
         .auth()
@@ -80,6 +81,7 @@ const LogingForm = () => {
         
     };
     const handleSignup = () => {
+      setLoading(true);
       clearErrors();
       fire
         .auth()
@@ -104,6 +106,7 @@ const LogingForm = () => {
         if (user) {
           clearInputs();
           setUser(user);
+          setLoading(false);
         } else {
           setUser("");
         }
@@ -165,6 +168,7 @@ const LogingForm = () => {
                     color="primary" >Sign In</Button>
                   <Typography variant="body1" >Don't have an account? 
                     <Button component="span" onClick={() => setHasAccount(!hasAccount)}> Sign up</Button>
+                    {loading && ( <CircularProgress /> )}
                   </Typography>
                 </>
               )}
