@@ -1,8 +1,7 @@
-import { Container, Typography, Paper, Input } from "@material-ui/core";
+import { Container, Typography, Paper, Input, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import React, {useState} from "react";
-import Add from "./DataBaseComponents/Add";
 import firebase from "firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +17,6 @@ export default function NewRecipe() {
  
   const classes = useStyles();
   const db = firebase.firestore();
-  //const onSubmit = data => console.log(data);
 
   const {
     register,
@@ -43,16 +41,23 @@ export default function NewRecipe() {
       <Container maxWidth="sm">
         <Paper elevation={3} className={classes.paper}>
           <Typography variant="h6" align="center">
-            Add New Recipe
+            Create New Recipe
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("Title", { required: true })} />
+            <TextField id='title-input'
+            name="title"
+            label="Title"
+            {...register("Title", { required: true })} />
             {errors.firstName?.type === "required" && "Title is required"}
 
-            <input {...register("Serving Size", { required: true })} />
+            <TextField
+            id='serving-size'
+            name='serving-size'
+            label='Serving Size'{...register("Serving Size", { required: true , pattern: [0-10] })} />
             {errors.lastName && "Serving size is required"}
 
-            <input type="submit" />
+            <Button
+            type="submit">Submit</Button>
           </form>
         </Paper>
       </Container>
