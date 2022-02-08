@@ -1,7 +1,14 @@
-import { Container, Typography, Paper, Input, Button, TextField } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Paper,
+  Input,
+  Button,
+  TextField,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import { useForm } from "react-hook-form";
-import React, {useState} from "react";
+import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
 import firebase from "firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,26 +21,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewRecipe() {
- 
   const classes = useStyles();
   const db = firebase.firestore();
 
   const {
-    register,
-    formState: { errors },
+    control,
     handleSubmit,
   } = useForm();
 
-
-  const onSubmit = data => {
-    db.collection("Recipes")
-        .add(data)
-      .then(function () {
-        console.log("Value successfully written!");
-      })
-      .catch(function (error) {
-        console.log("Error writing Value: ", error);
-      });
+  const onSubmit = (data) => {
+    console.log(data);
+    // db.collection("Recipes")
+    //   .add(data)
+    //   .then(function () {
+    //     console.log("Value successfully written!");
+    //   })
+    //   .catch(function (errors) {
+    //     console.log("Error writing Value: ", errors);
+    //   });
   };
 
   return (
@@ -41,23 +46,25 @@ export default function NewRecipe() {
       <Container maxWidth="sm">
         <Paper elevation={3} className={classes.paper}>
           <Typography variant="h6" align="center">
-            Create New Recipe
+            New Recipe
           </Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField id='title-input'
-            name="title"
-            label="Title"
-            {...register("Title", { required: true })} />
-            {errors.firstName?.type === "required" && "Title is required"}
+          <form >
+            <Controller
+            name={"Title"}
+            control={control}
+            defaultValue=""
+            render={({field: { onChange, value } }) => (
+              <TextField onChange={onChange} value={value} label={"Title"} />
+            )} />
+            <Controller
+            name={"Serving Size"}
+            control={control}
+            defaultValue=""
+            render={({field: { onChange, value } }) => (
+              <TextField onChange={onChange} value={value} label={"Serving Size"} />
+            )} />
 
-            <TextField
-            id='serving-size'
-            name='serving-size'
-            label='Serving Size'{...register("Serving Size", { required: true , pattern: [0-10] })} />
-            {errors.lastName && "Serving size is required"}
-
-            <Button
-            type="submit">Submit</Button>
+              <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
           </form>
         </Paper>
       </Container>
