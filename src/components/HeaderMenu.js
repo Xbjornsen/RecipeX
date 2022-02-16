@@ -88,7 +88,6 @@ const HeaderMenu = ({handleLogout}) => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    console.log("set to null");
   };
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
