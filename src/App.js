@@ -14,13 +14,14 @@ import About from "./components/About";
 import HeaderMenu from "./components/HeaderMenu";
 import LoginForm from "./components/LoginForm";
 
+
 export const App = () => {
 
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <HeaderMenu/> 
+        <HeaderMenu/>
         <Switch>
           <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />

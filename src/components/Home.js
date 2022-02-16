@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Container } from "@material-ui/core";
-import { Typography, Paper, Button } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   recipieHeading: {
     display: "flex",
     postion: "absolute",
-    fontSize: "14",
+    fontSize: 14,
   },
 }));
 

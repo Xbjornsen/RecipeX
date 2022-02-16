@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import firebase from "firebase";
+import { Button, TextField } from '@material-ui/core';
 
 
 
@@ -29,8 +30,8 @@ const Add = () => {
 
     return ( 
         <div >
-            <input onBlur={getValue} type='text' />
-            <button type='button' onClick={addValue}>Add</button>
+            <TextField variant="outlined" onBlur={getValue} type='text' />
+            <Button type='button' onClick={addValue}>Add</Button>
 
         </div>
     )
